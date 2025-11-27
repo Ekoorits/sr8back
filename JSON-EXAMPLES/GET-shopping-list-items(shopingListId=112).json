@@ -1,0 +1,37 @@
+[
+  {
+    "categoryName": "Piimatooted",
+    "categoryDescription": "Munad, juust, jne",
+    "items": [
+      {
+        "shoppingListItemId": 213,
+        "ingredientName": "piim",
+        "ingredientAmount": 4,
+        "measureUnitName": "l"
+      },
+      {
+        "shoppingListItemId": 214,
+        "ingredientName": "muna",
+        "ingredientAmount": 10,
+        "measureUnitName": "tk"
+      }
+    ]
+  },
+  {
+    "categoryName": "Puuviljad köögiviljad",
+    "categoryDescription": "",
+    "items": [
+      {
+        "shoppingListItemId": 215,
+        "categoryName": "Puuviljad köögiviljad",
+        "categoryDescription": "",
+        "ingredientName": "muna",
+        "ingredientAmount": 10,
+        "measureUnitName": "tk"
+      }
+    ]
+  }
+]
+
+
+
