@@ -58,7 +58,7 @@ CREATE TABLE meal_type (
 CREATE TABLE measure_unit (
                               id serial  NOT NULL,
                               name varchar(255)  NOT NULL,
-                              description int  NOT NULL,
+                              description varchar(255)  NULL,
                               CONSTRAINT measure_unit_pk PRIMARY KEY (id)
 );
 
