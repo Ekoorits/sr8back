@@ -22,4 +22,14 @@ INSERT INTO smartrecipebook.role (id, name) VALUES (default, 'admin');
 INSERT INTO smartrecipebook.role (id, name) VALUES (default, 'moderator');
 INSERT INTO smartrecipebook.role (id, name) VALUES (default, 'customer');
 
+INSERT INTO smartrecipebook.category (id, name, description) VALUES (default, 'Piimatooted','munad juust');
+INSERT INTO smartrecipebook.category (id, name, description) VALUES (default, 'Värsked toidukaubad','puuviljad köögiviljad');
+INSERT INTO smartrecipebook.category (id, name) VALUES (default, 'Kauasäilivad toidukaubad');
+INSERT INTO smartrecipebook.category (id, name) VALUES (default, 'Kuivained');
+INSERT INTO smartrecipebook.category (id, name) VALUES (default, 'Külmutatud toidukaubad');
+INSERT INTO smartrecipebook.category (id, name, description) VALUES (default, 'Maiustused','snäkid kommid');
+INSERT INTO smartrecipebook.category (id, name) VALUES (default, 'Alkohol');
+INSERT INTO smartrecipebook.category (id, name) VALUES (default, 'Muu');
+
+
 

@@ -6,7 +6,7 @@
 CREATE TABLE category (
                           id serial  NOT NULL,
                           name varchar(255)  NOT NULL,
-                          description varchar(255)  NOT NULL,
+                          description varchar(255)  NULL,
                           CONSTRAINT category_pk PRIMARY KEY (id)
 );
 
