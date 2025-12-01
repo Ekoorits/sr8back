@@ -62,12 +62,12 @@ CREATE TABLE measure_unit (
                               CONSTRAINT measure_unit_pk PRIMARY KEY (id)
 );
 
--- Table: receipe_image
-CREATE TABLE receipe_image (
+-- Table: recipe_image
+CREATE TABLE recipe_image (
                                id serial  NOT NULL,
                                recipe_id int  NOT NULL,
                                image_data bytea  NOT NULL,
-                               CONSTRAINT id PRIMARY KEY (id)
+                               CONSTRAINT recipe_image_id PRIMARY KEY (id)
 );
 
 -- Table: recipe
@@ -81,7 +81,7 @@ CREATE TABLE recipe (
                         author varchar(255)  NOT NULL,
                         pax int  NOT NULL,
                         instructions varchar(500)  NOT NULL,
-                        CONSTRAINT id PRIMARY KEY (id)
+                        CONSTRAINT recipe_id PRIMARY KEY (id)
 );
 
 -- Table: recipe_ingredient
@@ -128,7 +128,7 @@ CREATE TABLE shopping_recipe (
                                  recipe_id int  NOT NULL,
                                  shopping_id int  NOT NULL,
                                  pax int  NOT NULL,
-                                 CONSTRAINT id PRIMARY KEY (id)
+                                 CONSTRAINT shopping_recipe_id PRIMARY KEY (id)
 );
 
 -- Table: user
@@ -138,7 +138,7 @@ CREATE TABLE "user" (
                         username varchar(50)  NOT NULL,
                         password int  NOT NULL,
                         status varchar(1)  NOT NULL,
-                        CONSTRAINT id PRIMARY KEY (id)
+                        CONSTRAINT user_id PRIMARY KEY (id)
 );
 
 -- foreign keys
@@ -166,8 +166,8 @@ ALTER TABLE ingredient ADD CONSTRAINT ingredient_measure_unit
             INITIALLY IMMEDIATE
 ;
 
--- Reference: receipe_image_recipe (table: receipe_image)
-ALTER TABLE receipe_image ADD CONSTRAINT receipe_image_recipe
+-- Reference: recipe_image_recipe (table: recipe_image)
+ALTER TABLE recipe_image ADD CONSTRAINT recipe_image_recipe
     FOREIGN KEY (recipe_id)
         REFERENCES recipe (id)
         NOT DEFERRABLE
