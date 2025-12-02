@@ -1,6 +1,6 @@
 package ee.team.sr8back.persistence.shoppinglist;
 
-import ee.team.sr8back.persistence.ingridient.Ingredient;
+import ee.team.sr8back.persistence.ingredient.Ingredient;
 import ee.team.sr8back.persistence.shopping.Shopping;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;

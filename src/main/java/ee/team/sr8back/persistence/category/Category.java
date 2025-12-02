@@ -1,14 +1,10 @@
 package ee.team.sr8back.persistence.category;
 
-import ee.team.sr8back.persistence.ingridient.Ingredient;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.util.LinkedHashSet;
-import java.util.Set;
 
 @Getter
 @Setter
@@ -28,8 +24,5 @@ public class Category {
     @Size(max = 255)
     @Column(name = "description")
     private String description;
-
-    @OneToMany(mappedBy = "category")
-    private Set<Ingredient> ingredients = new LinkedHashSet<>();
 
 }

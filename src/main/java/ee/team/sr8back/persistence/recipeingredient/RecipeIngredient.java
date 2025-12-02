@@ -1,6 +1,7 @@
 package ee.team.sr8back.persistence.recipeingredient;
 
-import ee.team.sr8back.persistence.ingridient.Ingredient;
+import ee.team.sr8back.persistence.ingredient.Ingredient;
+import ee.team.sr8back.persistence.recipe.Recipe;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
@@ -19,8 +20,9 @@ public class RecipeIngredient {
     private Integer id;
 
     @NotNull
-    @Column(name = "recipe_id", nullable = false)
-    private Integer recipeId;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "recipe_id", nullable = false)
+    private Recipe recipe;
 
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)

@@ -1,7 +1,5 @@
 package ee.team.sr8back.service;
 
-
-
 import ee.team.sr8back.controller.login.dto.LoginResponse;
 import ee.team.sr8back.persistence.user.User;
 import ee.team.sr8back.persistence.user.UserMapper;
@@ -14,17 +12,16 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-
 public class LoginService {
     private final UserRepository userRepository;
     private final UserMapper userMapper;
 
     public LoginResponse login(String username, String password) {
-       User user = getActiveUserBy(username, password);
-       return userMapper.toLoginResponse(user);
+        User user = getValidActiveUserBy(username, password);
+        return userMapper.toLoginResponse(user);
     }
 
-    private User getActiveUserBy(String username, String password) {
+    private User getValidActiveUserBy(String username, String password) {
         return userRepository.findActiveUserBy(username, password)
                 .orElseThrow(() -> new ExpressionException("Error", "sdaad"));
     }
