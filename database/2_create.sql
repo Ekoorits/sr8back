@@ -136,7 +136,7 @@ CREATE TABLE "user" (
                         id serial  NOT NULL,
                         role_id int  NOT NULL,
                         username varchar(50)  NOT NULL,
-                        password int  NOT NULL,
+                        password varchar(255)  NOT NULL,
                         status varchar(1)  NOT NULL,
                         CONSTRAINT user_id PRIMARY KEY (id)
 );
