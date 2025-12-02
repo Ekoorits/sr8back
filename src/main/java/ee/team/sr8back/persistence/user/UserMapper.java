@@ -6,7 +6,7 @@ import ee.team.sr8back.infrastructure.RoleEnum;
 import ee.team.sr8back.infrastructure.Status;
 import org.mapstruct.*;
 
-@Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = MappingConstants.ComponentModel.SPRING, imports = {RoleEnum.class, Status.class})
+@Mapper(componentModel = "spring", imports = {RoleEnum.class, Status.class})
 public interface UserMapper {
 
     @Mapping(source = "id", target = "userId")

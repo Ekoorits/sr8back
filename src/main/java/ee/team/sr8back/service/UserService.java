@@ -3,6 +3,7 @@ package ee.team.sr8back.service;
 import ee.team.sr8back.controller.user.dto.NewUserRequest;
 import ee.team.sr8back.infrastructure.RoleEnum;
 import ee.team.sr8back.infrastructure.Status;
+import ee.team.sr8back.persistence.contact.ContactRepository;
 import ee.team.sr8back.persistence.role.RoleRepository;
 import ee.team.sr8back.persistence.user.User;
 import ee.team.sr8back.persistence.user.UserMapper;
@@ -18,6 +19,7 @@ public class UserService {
     private final RoleRepository roleRepository;
     private final UserRepository userRepository;
     private final UserMapper userMapper;
+    private final ContactRepository contactRepository;
 
 
     //@Transactional
@@ -29,5 +31,8 @@ public class UserService {
         user.setPassword(newUserRequest.getPassword());
         user.setStatus(Status.ACTIVE.getCode());
         userRepository.save(user);
+
+        contactRepository
+
     }
 }
