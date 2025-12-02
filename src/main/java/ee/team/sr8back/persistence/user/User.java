@@ -29,7 +29,7 @@ public class User {
 
     @NotNull
     @Column(name = "password", nullable = false)
-    private Integer password;
+    private String password;
 
     @Size(max = 1)
     @NotNull
