@@ -3,6 +3,9 @@ package ee.team.sr8back.service;
 import ee.team.sr8back.controller.user.dto.NewUserRequest;
 import ee.team.sr8back.infrastructure.RoleEnum;
 import ee.team.sr8back.infrastructure.Status;
+import ee.team.sr8back.persistence.contact.Contact;
+import ee.team.sr8back.persistence.contact.ContactMapper;
+import ee.team.sr8back.persistence.contact.ContactRepository;
 import ee.team.sr8back.persistence.role.RoleRepository;
 import ee.team.sr8back.persistence.user.User;
 import ee.team.sr8back.persistence.user.UserMapper;
@@ -18,6 +21,8 @@ public class UserService {
     private final RoleRepository roleRepository;
     private final UserRepository userRepository;
     private final UserMapper userMapper;
+    private final ContactRepository contactRepository;
+    private final ContactMapper contactMapper;
 
     @Transactional
     public User addNewUser (NewUserRequest newUserRequest) {
@@ -30,7 +35,13 @@ public class UserService {
         // TODO: tee globaalne staatuse ENUM
         user.setStatus(Status.ACTIVE.getCode());
         userRepository.save(user);
-        return user;
 
+        Contact contact = contactMapper.toContact(newUserRequest);
+        contact.setFirstName(newUserRequest.getFirstname());
+        contact.setLastName(newUserRequest.getLastname());
+        contact.setEmail(newUserRequest.getEmail());
+        contactRepository.save(contact);
+
+        return user;
     }
 }
