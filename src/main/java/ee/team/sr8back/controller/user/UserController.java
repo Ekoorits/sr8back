@@ -1,8 +1,6 @@
 package ee.team.sr8back.controller.user;
 
-import ee.team.sr8back.controller.user.dto.UserInfo;
-import ee.team.sr8back.persistence.contact.Contact;
-import ee.team.sr8back.persistence.user.User;
+import ee.team.sr8back.controller.user.dto.NewUserRequest;
 import ee.team.sr8back.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,7 +14,7 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/user")
-    public void addNewUser(@RequestBody UserInfo userInfo){
-        userService.addNewUser(userInfo);
+    public void addNewUser(@RequestBody NewUserRequest newUserRequest){
+        userService.addNewUser(newUserRequest);
     }
 }

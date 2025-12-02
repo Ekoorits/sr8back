@@ -31,7 +31,7 @@ INSERT INTO smartrecipebook.category (id, name, description) VALUES (default, 'M
 INSERT INTO smartrecipebook.category (id, name) VALUES (default, 'Alkohol');
 INSERT INTO smartrecipebook.category (id, name) VALUES (default, 'Muu');
 
-INSERT INTO smartrecipebook.user (id, role_id, username, password, status) VALUES (default, 1, 'Peeter', 1234, 'A');
+INSERT INTO smartrecipebook.user (id, role_id, username, password, status) VALUES (default, 1, 'Peeter', '1234', 'A');
 
 
 
