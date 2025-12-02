@@ -25,7 +25,7 @@ public class UserService {
     private final ContactMapper contactMapper;
 
     @Transactional
-    public User addNewUser (NewUserRequest newUserRequest) {
+    public void addNewUser (NewUserRequest newUserRequest) {
 
         User user = userMapper.toUser(newUserRequest);
         user.setRole(roleRepository.getRoleById(RoleEnum.CUSTOMER.getCode()));
@@ -37,11 +37,11 @@ public class UserService {
         userRepository.save(user);
 
         Contact contact = contactMapper.toContact(newUserRequest);
+        contact.setUser(userRepository.findActiveUserBy(user.getUsername(),user.getPassword()).orElseThrow());
         contact.setFirstName(newUserRequest.getFirstname());
         contact.setLastName(newUserRequest.getLastname());
         contact.setEmail(newUserRequest.getEmail());
         contactRepository.save(contact);
 
-        return user;
     }
 }
