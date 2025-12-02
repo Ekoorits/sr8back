@@ -20,8 +20,12 @@ public class LoginService {
     private final UserMapper userMapper;
 
     public LoginResponse login(String username, String password) {
-       User user = userRepository.findActiveUserBy(username, password)
-               .orElseThrow(()-> new ExpressionException("Error", "sdaad"));
+       User user = getActiveUserBy(username, password);
        return userMapper.toLoginResponse(user);
+    }
+
+    private User getActiveUserBy(String username, String password) {
+        return userRepository.findActiveUserBy(username, password)
+                .orElseThrow(() -> new ExpressionException("Error", "sdaad"));
     }
 }
