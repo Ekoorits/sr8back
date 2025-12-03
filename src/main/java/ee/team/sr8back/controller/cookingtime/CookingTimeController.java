@@ -13,9 +13,10 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CookingTimeController {
     private final CookingTimeService cookingTimeService;
-@GetMapping("/cookingtime")
-@Operation(summary = "Tagastab valmistusaegade listi")
+
+    @GetMapping("/cookingtime")
+    @Operation(summary = "Tagastab valmistusaegade listi")
     public List<CookingTimeResponse> findAllCookingTimes() {
-    return cookingTimeService.findAllCookingTimes();
-}
+        return cookingTimeService.findAllCookingTimes();
+    }
 }
