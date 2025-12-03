@@ -1,4 +1,4 @@
-package ee.team.sr8back.infrastructure;
+package ee.team.sr8back.infrastructure.status;
 
 import lombok.Getter;
 

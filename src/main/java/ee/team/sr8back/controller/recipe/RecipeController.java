@@ -21,4 +21,10 @@ public class RecipeController {
     public List<RecipeResponse> findRecipesBy(@RequestParam String searchParam) {
         return recipeService.findRecipesBy(searchParam);
     }
+
+    @GetMapping("/recipes")
+    @Operation(summary = "Tagastab filtreeritud retseptid vastavalt kasutaja sisestatud filtritele")
+    public List<RecipeResponse> findRecipesBy(@RequestParam Integer mealTypeId, @RequestParam Integer difficultyId, @RequestParam Integer cookingTimeId) {
+        return recipeService.findRecipesBy(mealTypeId, difficultyId, cookingTimeId);
+    }
 }

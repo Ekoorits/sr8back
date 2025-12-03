@@ -15,9 +15,18 @@ public class RecipeService {
 
     private final RecipeRepository recipeRepository;
     private final RecipeMapper recipeMapper;
+    private final DifficultyService difficultyService;
 
     public List<RecipeResponse> findRecipesBy(String searchParam) {
         List<Recipe> recipes = recipeRepository.findRecipesBy(searchParam);
         return recipeMapper.toRecipes(recipes);
     }
+
+    public List<RecipeResponse> findRecipesBy(Integer mealTypeId, Integer difficultyId, Integer cookingTimeId) {
+        Integer difficultyLevelNumber = difficultyService.getDifficultyLevelNumber(difficultyId);
+
+        List<Recipe> recipes = recipeRepository.findRecipesBy(mealTypeId, difficultyLevelNumber, 1);
+        return recipeMapper.toRecipes(recipes);
+    }
+
 }
