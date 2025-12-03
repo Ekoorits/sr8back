@@ -1,11 +1,10 @@
 package ee.team.sr8back.service;
 
 import ee.team.sr8back.controller.user.dto.NewUserRequest;
-import ee.team.sr8back.infrastructure.RoleEnum;
-import ee.team.sr8back.infrastructure.Status;
 import ee.team.sr8back.persistence.contact.Contact;
 import ee.team.sr8back.persistence.contact.ContactMapper;
 import ee.team.sr8back.persistence.contact.ContactRepository;
+import ee.team.sr8back.persistence.role.Role;
 import ee.team.sr8back.persistence.role.RoleRepository;
 import ee.team.sr8back.persistence.user.User;
 import ee.team.sr8back.persistence.user.UserMapper;
@@ -18,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class UserService {
 
+    public static final String CUSTOMER_ROLE_NAME = "customer";
     private final RoleRepository roleRepository;
     private final UserRepository userRepository;
     private final UserMapper userMapper;
@@ -27,29 +27,33 @@ public class UserService {
 
     @Transactional
     public void addNewUser(NewUserRequest newUserRequest) {
+        User user = createAndSaveUser(newUserRequest);
+        createAndSaveContact(newUserRequest, user);
+    }
+
+    private User createAndSaveUser(NewUserRequest newUserRequest) {
         User user = createNewUser(newUserRequest);
         userRepository.save(user);
+        return user;
+    }
+
+    private User createNewUser(NewUserRequest newUserRequest) {
+        Role role = roleRepository.getRoleBy(CUSTOMER_ROLE_NAME);
+        User user = userMapper.toUser(newUserRequest);
+        user.setRole(role);
+        return user;
+    }
+
+    private void createAndSaveContact(NewUserRequest newUserRequest, User user) {
         Contact contact = createNewContact(newUserRequest, user);
         contactRepository.save(contact);
     }
 
-    private User createNewUser(NewUserRequest newUserRequest) {
-        User user = userMapper.toUser(newUserRequest);
-        user.setRole(roleRepository.getRoleById(RoleEnum.CUSTOMER.getCode()));
-        user.setUsername(newUserRequest.getUsername());
-        user.setPassword(newUserRequest.getPassword());
-        user.setStatus(Status.ACTIVE.getCode());
-        return user;
-    }
 
     private Contact createNewContact(NewUserRequest newUserRequest, User user) {
         Contact contact = contactMapper.toContact(newUserRequest);
-        contact.setUser(userRepository.findActiveUserBy(user.getUsername(), user.getPassword()).orElseThrow());
-        contact.setFirstName(newUserRequest.getFirstName());
-        contact.setLastName(newUserRequest.getLastName());
-        contact.setEmail(newUserRequest.getEmail());
+        contact.setUser(user);
         return contact;
     }
-
 
 }

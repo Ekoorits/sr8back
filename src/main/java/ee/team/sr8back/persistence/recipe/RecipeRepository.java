@@ -11,8 +11,8 @@ public interface RecipeRepository extends JpaRepository<Recipe, Integer> {
 
     @Query("""
             select r from Recipe r
-            where (r.mealType.id = :mealtypeId or :mealTypeId) and r.cookingTime.minutesMax <= :minutesMax and r.difficulty.levelNumber <= :levelNumber
+            where (r.mealType.id = :mealTypeId or :mealTypeId = 0) and r.difficulty.levelNumber <= :difficultyLevelNumber and r.cookingTime.minutesMax <= :cookingTimeMinutesMax
             order by r.name""")
-    List<Recipe> findRecipesBy(Integer id, Integer minutesMax, Integer levelNumber);
+    List<Recipe> findRecipesBy(Integer mealTypeId, Integer difficultyLevelNumber, Integer cookingTimeMinutesMax);
 
 }
