@@ -1,16 +1,16 @@
 package ee.team.sr8back.controller.user.dto;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
-
+@NoArgsConstructor
 public class NewUserRequest {
     private String username;
     private String password;
-    private String firstname;
-    private String lastname;
+    private String firstName;
+    private String lastName;
     private String email;
 }

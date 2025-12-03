@@ -31,8 +31,7 @@ INSERT INTO smartrecipebook.category (id, name, description) VALUES (default, 'M
 INSERT INTO smartrecipebook.category (id, name) VALUES (default, 'Alkohol');
 INSERT INTO smartrecipebook.category (id, name) VALUES (default, 'Muu');
 
-INSERT INTO smartrecipebook.user (id, role_id, username, password, status) VALUES (default, 1, 'Peeter', 1234, 'A');
-INSERT INTO smartrecipebook.recipe(id, user_id, meal_type_id, cooking_time_id, difficulty_id, name, author, pax, instructions) VALUES (1,1,3,1,1,'kook','pommer',4,'blabla')
+INSERT INTO smartrecipebook.user (id, role_id, username, password, status) VALUES (default, 1, 'Peeter', '1234', 'A');
 
 
 

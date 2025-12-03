@@ -7,11 +7,9 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring")
 public interface ContactMapper {
 
-    @Mapping(source = "firstname", target = "firstName")
-    @Mapping(source = "lastname", target = "lastName")
+    @Mapping(source = "firstName", target = "firstName")
+    @Mapping(source = "lastName", target = "lastName")
     @Mapping(source = "email", target = "email")
-
     Contact toContact(NewUserRequest newUserRequest);
-
 
 }

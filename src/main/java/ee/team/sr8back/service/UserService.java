@@ -24,34 +24,32 @@ public class UserService {
     private final ContactRepository contactRepository;
     private final ContactMapper contactMapper;
 
-    @Transactional
-    public void addNewUser (NewUserRequest newUserRequest) {
 
+    @Transactional
+    public void addNewUser(NewUserRequest newUserRequest) {
         User user = createNewUser(newUserRequest);
         userRepository.save(user);
-
         Contact contact = createNewContact(newUserRequest, user);
         contactRepository.save(contact);
-
-    }
-
-    private Contact createNewContact(NewUserRequest newUserRequest, User user) {
-        Contact contact = contactMapper.toContact(newUserRequest);
-        contact.setUser(userRepository.findActiveUserBy(user.getUsername(), user.getPassword()).orElseThrow());
-        contact.setFirstName(newUserRequest.getFirstname());
-        contact.setLastName(newUserRequest.getLastname());
-        contact.setEmail(newUserRequest.getEmail());
-        return contact;
     }
 
     private User createNewUser(NewUserRequest newUserRequest) {
         User user = userMapper.toUser(newUserRequest);
         user.setRole(roleRepository.getRoleById(RoleEnum.CUSTOMER.getCode()));
         user.setUsername(newUserRequest.getUsername());
-        // TODO: vb põhjustab probleemi Integer.valuOf...
         user.setPassword(newUserRequest.getPassword());
-        // TODO: tee globaalne staatuse ENUM
         user.setStatus(Status.ACTIVE.getCode());
         return user;
     }
+
+    private Contact createNewContact(NewUserRequest newUserRequest, User user) {
+        Contact contact = contactMapper.toContact(newUserRequest);
+        contact.setUser(userRepository.findActiveUserBy(user.getUsername(), user.getPassword()).orElseThrow());
+        contact.setFirstName(newUserRequest.getFirstName());
+        contact.setLastName(newUserRequest.getLastName());
+        contact.setEmail(newUserRequest.getEmail());
+        return contact;
+    }
+
+
 }
