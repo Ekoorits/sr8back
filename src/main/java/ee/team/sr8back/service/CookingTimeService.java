@@ -1,7 +1,7 @@
 package ee.team.sr8back.service;
 
 import ee.team.sr8back.infrastructure.exception.PrimaryKeyNotFoundException;
-import ee.team.sr8back.persistence.CookingTimeRepository;
+import ee.team.sr8back.persistence.cookingtime.CookingTimeRepository;
 import ee.team.sr8back.persistence.cookingtime.CookingTime;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -13,8 +13,8 @@ public class CookingTimeService {
 
     private final CookingTimeRepository cookingTimeRepository;
 
-    public Integer getCookingTimeMinutesMax(Integer cookingTimeid) {
-        return getValidCookingTimeBy(cookingTimeid).getMinutesMax();
+    public Integer getCookingTimeMinutesMax(Integer cookingTimeId) {
+        return getValidCookingTimeBy(cookingTimeId).getMinutesMax();
     }
 
     public CookingTime getValidCookingTimeBy(Integer cookingTimeId) {
