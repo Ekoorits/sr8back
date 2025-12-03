@@ -16,6 +16,7 @@ public class RecipeService {
     private final RecipeRepository recipeRepository;
     private final RecipeMapper recipeMapper;
     private final DifficultyService difficultyService;
+    private final CookingTimeService cookingTimeService;
 
     public List<RecipeResponse> findRecipesBy(String searchParam) {
         List<Recipe> recipes = recipeRepository.findRecipesBy(searchParam);
@@ -24,8 +25,9 @@ public class RecipeService {
 
     public List<RecipeResponse> findRecipesBy(Integer mealTypeId, Integer difficultyId, Integer cookingTimeId) {
         Integer difficultyLevelNumber = difficultyService.getDifficultyLevelNumber(difficultyId);
+        Integer cookingTimeMinutesMax = cookingTimeService.getCookingTimeMinutesMax(cookingTimeId);
 
-        List<Recipe> recipes = recipeRepository.findRecipesBy(mealTypeId, difficultyLevelNumber, 1);
+        List<Recipe> recipes = recipeRepository.findRecipesBy(mealTypeId, difficultyLevelNumber, cookingTimeMinutesMax);
         return recipeMapper.toRecipes(recipes);
     }
 
