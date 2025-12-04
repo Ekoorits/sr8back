@@ -33,10 +33,6 @@ INSERT INTO smartrecipebook.category (id, name) VALUES (default, 'Muu');
 
 INSERT INTO smartrecipebook.user (id, role_id, username, password, status) VALUES (default, 1, 'Peeter', '1234', 'A');
 
-INSERT INTO smartrecipebook.recipe (id, user_id, meal_type_id, cooking_time_id, difficulty_id, name, author, pax, instructions) VALUES (default, 2,1,3,2,'Makrooniga veiseliha', 'Enri Koorits', 10, 'aefefeswgfewfqewf');
-INSERT INTO smartrecipebook.recipe (id, user_id, meal_type_id, cooking_time_id, difficulty_id, name, author, pax, instructions) VALUES (default, 2,1,3,2,'Piimasupp', 'Saber Kutter', 10, 'sgre5ety');
-INSERT INTO smartrecipebook.recipe (id, user_id, meal_type_id, cooking_time_id, difficulty_id, name, author, pax, instructions) VALUES (default, 2,1,3,2,'Pada kalaga', 'Kaster Muhupea', 10, '1234dfsgraeg');
-INSERT INTO smartrecipebook.recipe (id, user_id, meal_type_id, cooking_time_id, difficulty_id, name, author, pax, instructions) VALUES (default, 2,1,3,2,'Praekala', 'Kaster Muhupea', 7, '12efrewr34dfsgrag');
 
 
 
