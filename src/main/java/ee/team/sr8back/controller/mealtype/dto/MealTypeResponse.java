@@ -7,9 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-
 public class MealTypeResponse {
-
     private Integer mealTypeId;
     private String mealTypeName;
 }

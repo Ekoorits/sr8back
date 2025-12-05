@@ -10,5 +10,4 @@ import lombok.NoArgsConstructor;
 public class CookingTimeResponse {
     private Integer cookingTimeId;
     private Integer cookingTimeMinutesMax;
-
 }

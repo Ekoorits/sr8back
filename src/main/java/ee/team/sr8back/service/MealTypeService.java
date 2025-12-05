@@ -1,16 +1,17 @@
 package ee.team.sr8back.service;
 
 import ee.team.sr8back.controller.mealtype.dto.MealTypeResponse;
+import ee.team.sr8back.persistence.mealtype.MealType;
 import ee.team.sr8back.persistence.mealtype.MealTypeMapper;
 import ee.team.sr8back.persistence.mealtype.MealTypeRepository;
-import ee.team.sr8back.persistence.mealtype.MealType;
-import lombok.RequiredArgsConstructor;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
+@AllArgsConstructor
+
 public class MealTypeService {
 
     private final MealTypeRepository mealTypeRepository;
@@ -19,6 +20,5 @@ public class MealTypeService {
     public List<MealTypeResponse> findAllMealTypes() {
         List<MealType> mealTypes = mealTypeRepository.findAll();
         return mealTypeMapper.toMealTypeResponses(mealTypes);
-
     }
 }

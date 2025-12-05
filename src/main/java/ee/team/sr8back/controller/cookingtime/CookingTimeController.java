@@ -12,6 +12,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 public class CookingTimeController {
+
     private final CookingTimeService cookingTimeService;
 
     @GetMapping("/cookingtime")

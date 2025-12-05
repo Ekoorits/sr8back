@@ -29,6 +29,5 @@ public class DifficultyService {
     public List<DifficultyResponse> findAllDifficultyTypes() {
         List<Difficulty> difficulties = difficultyRepository.findAll();
         return difficultyMapper.toDifficultyResponses(difficulties);
-
     }
 }

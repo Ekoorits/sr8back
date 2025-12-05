@@ -11,17 +11,13 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-
-public class  MealTypeController {
-
+public class MealTypeController {
 
     private final MealTypeService mealTypeService;
 
     @GetMapping("/mealtypes")
     @Operation(summary = "Tagastab toidukordade listi")
-
     public List<MealTypeResponse> findAllMealTypes() {
         return mealTypeService.findAllMealTypes();
     }
-
 }

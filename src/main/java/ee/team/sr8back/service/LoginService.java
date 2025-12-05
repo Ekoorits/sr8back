@@ -1,14 +1,14 @@
 package ee.team.sr8back.service;
 
 import ee.team.sr8back.controller.login.dto.LoginResponse;
+import ee.team.sr8back.infrastructure.exception.ForbiddenException;
 import ee.team.sr8back.persistence.user.User;
 import ee.team.sr8back.persistence.user.UserMapper;
 import ee.team.sr8back.persistence.user.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.expression.ExpressionException;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import static ee.team.sr8back.infrastructure.error.Error.INCORRECT_CREDENTIALS;
 
 @Service
 @RequiredArgsConstructor
@@ -23,6 +23,6 @@ public class LoginService {
 
     private User getValidActiveUserBy(String username, String password) {
         return userRepository.findActiveUserBy(username, password)
-                .orElseThrow(() -> new ExpressionException("Error", "sdaad"));
+                .orElseThrow(() -> new ForbiddenException(INCORRECT_CREDENTIALS.getMessage(), INCORRECT_CREDENTIALS.getErrorCode()));
     }
 }

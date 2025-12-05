@@ -16,7 +16,7 @@ public class UserController {
 
     @PostMapping("/user")
     @Operation(summary = "Uue kasutaja lisamine user ja contact tabelisse")
-    public void addNewUser(@RequestBody NewUserRequest newUserRequest){
+    public void addNewUser(@RequestBody NewUserRequest newUserRequest) {
         userService.addNewUser(newUserRequest);
     }
 }

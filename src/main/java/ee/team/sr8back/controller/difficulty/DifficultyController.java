@@ -12,10 +12,12 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 public class DifficultyController {
+
     private final DifficultyService difficultyService;
-@GetMapping("/difficulties")
-@Operation(summary = "Tagastab kõik raskusastmed listina")
-public List<DifficultyResponse> findAllDifficultyTypes() {
-    return difficultyService.findAllDifficultyTypes();
-}
+
+    @GetMapping("/difficulties")
+    @Operation(summary = "Tagastab kõik raskusastmed listina")
+    public List<DifficultyResponse> findAllDifficultyTypes() {
+        return difficultyService.findAllDifficultyTypes();
+    }
 }
