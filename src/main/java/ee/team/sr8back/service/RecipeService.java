@@ -2,12 +2,18 @@ package ee.team.sr8back.service;
 
 import ee.team.sr8back.controller.recipe.dto.NewRecipeDetailsRequest;
 import ee.team.sr8back.controller.recipe.dto.RecipeResponse;
+import ee.team.sr8back.infrastructure.exception.PrimaryKeyNotFoundException;
 import ee.team.sr8back.infrastructure.util.BytesConverter;
+import ee.team.sr8back.persistence.cookingtime.CookingTime;
+import ee.team.sr8back.persistence.difficulty.Difficulty;
+import ee.team.sr8back.persistence.mealtype.MealType;
 import ee.team.sr8back.persistence.recipe.Recipe;
 import ee.team.sr8back.persistence.recipe.RecipeMapper;
 import ee.team.sr8back.persistence.recipe.RecipeRepository;
 import ee.team.sr8back.persistence.recipeimage.RecipeImage;
 import ee.team.sr8back.persistence.recipeimage.RecipeImageRepository;
+import ee.team.sr8back.persistence.user.User;
+import ee.team.sr8back.persistence.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,6 +29,8 @@ public class RecipeService {
     private final DifficultyService difficultyService;
     private final CookingTimeService cookingTimeService;
     private final RecipeImageRepository recipeImageRepository;
+    private final MealTypeService mealTypeService;
+    private final UserRepository userRepository;
 
     @Transactional
     public void addNewRecipeDetails(NewRecipeDetailsRequest newRecipeDetailsRequest) {
@@ -50,7 +58,38 @@ public class RecipeService {
     }
 
     private Recipe createNewRecipe(NewRecipeDetailsRequest newRecipeRequest) {
-        return recipeMapper.toRecipe(newRecipeRequest);
+        Recipe recipe = recipeMapper.toRecipe(newRecipeRequest);
+        getCookingTimeMinutesAndSetToRecipe(newRecipeRequest, recipe);
+        getMealTypeAndSetToRecipe(newRecipeRequest, recipe);
+        getDifficultyLevelAndSetToRecipe(newRecipeRequest, recipe);
+        getCurrentUserAndSetAsAddingUser(recipe);
+        return recipe;
+    }
+
+    private void getCookingTimeMinutesAndSetToRecipe(NewRecipeDetailsRequest newRecipeRequest, Recipe recipe) {
+        CookingTime cookingTime = cookingTimeService.getCookingTime(newRecipeRequest.getCookingTimeMinutesMax());
+        recipe.setCookingTime(cookingTime);
+    }
+
+    private void getMealTypeAndSetToRecipe(NewRecipeDetailsRequest newRecipeRequest, Recipe recipe) {
+        MealType mealType = mealTypeService.getMealType(newRecipeRequest.getMealType());
+        recipe.setMealType(mealType);
+    }
+
+    private void getDifficultyLevelAndSetToRecipe(NewRecipeDetailsRequest newRecipeRequest, Recipe recipe) {
+        Difficulty difficulty = difficultyService.getDifficultyBy(newRecipeRequest.getDifficultyLevelNumber());
+        recipe.setDifficulty(difficulty);
+    }
+
+    private void getCurrentUserAndSetAsAddingUser(Recipe recipe) {
+        User user = getCurrentUser();
+        recipe.setUser(user);
+    }
+
+    private User getCurrentUser(){
+        // TODO: Find active user from FE session storage
+        return userRepository.findById(1)
+                .orElseThrow(() -> new PrimaryKeyNotFoundException("id", 1));
     }
 
     private void handleAddRecipeImage(String imageData, Recipe recipe){

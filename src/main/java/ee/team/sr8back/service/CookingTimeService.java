@@ -1,6 +1,7 @@
 package ee.team.sr8back.service;
 
 import ee.team.sr8back.controller.cookingtime.dto.CookingTimeResponse;
+import ee.team.sr8back.infrastructure.exception.DataNotFoundException;
 import ee.team.sr8back.infrastructure.exception.PrimaryKeyNotFoundException;
 import ee.team.sr8back.persistence.cookingtime.CookingTime;
 import ee.team.sr8back.persistence.cookingtime.CookingTimeMapper;
@@ -29,5 +30,10 @@ public class CookingTimeService {
     public List<CookingTimeResponse> findAllCookingTimes() {
         List<CookingTime> cookingTimes = cookingTimeRepository.findAll();
         return cookingTimeMapper.toCookingTimeResponses(cookingTimes);
+    }
+
+    public CookingTime getCookingTime(Integer cookingTimeMinutesMax) {
+        return cookingTimeRepository.getCookingTimeBy(cookingTimeMinutesMax)
+                .orElseThrow(() -> new DataNotFoundException("Andmeviga", 444));
     }
 }

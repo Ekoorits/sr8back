@@ -1,6 +1,7 @@
 package ee.team.sr8back.service;
 
 import ee.team.sr8back.controller.difficulty.dto.DifficultyResponse;
+import ee.team.sr8back.infrastructure.exception.DataNotFoundException;
 import ee.team.sr8back.infrastructure.exception.PrimaryKeyNotFoundException;
 import ee.team.sr8back.persistence.difficulty.Difficulty;
 import ee.team.sr8back.persistence.difficulty.DifficultyMapper;
@@ -29,5 +30,10 @@ public class DifficultyService {
     public List<DifficultyResponse> findAllDifficultyTypes() {
         List<Difficulty> difficulties = difficultyRepository.findAll();
         return difficultyMapper.toDifficultyResponses(difficulties);
+    }
+
+    public Difficulty getDifficultyBy(Integer difficultyLevelNumber) {
+        return difficultyRepository.getDifficultyBy(difficultyLevelNumber)
+                .orElseThrow(() -> new DataNotFoundException("Andmeviga", 444));
     }
 }
