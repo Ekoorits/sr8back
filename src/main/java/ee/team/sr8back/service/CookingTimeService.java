@@ -34,6 +34,6 @@ public class CookingTimeService {
 
     public CookingTime getCookingTime(Integer cookingTimeMinutesMax) {
         return cookingTimeRepository.getCookingTimeBy(cookingTimeMinutesMax)
-                .orElseThrow(() -> new DataNotFoundException("Andmeviga", 444));
+                .orElseThrow(() -> new DataNotFoundException("Andmeviga(CookingTime)", 444));
     }
 }

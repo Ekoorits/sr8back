@@ -25,6 +25,6 @@ public class MealTypeService {
 
     public MealType getMealType(String mealType) {
         return mealTypeRepository.getMealTypeBy(mealType)
-                .orElseThrow(() -> new DataNotFoundException("Andmeviga", 444));
+                .orElseThrow(() -> new DataNotFoundException("Andmeviga(MealType)", 444));
     }
 }

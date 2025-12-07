@@ -34,6 +34,6 @@ public class DifficultyService {
 
     public Difficulty getDifficultyBy(Integer difficultyLevelNumber) {
         return difficultyRepository.getDifficultyBy(difficultyLevelNumber)
-                .orElseThrow(() -> new DataNotFoundException("Andmeviga", 444));
+                .orElseThrow(() -> new DataNotFoundException("Andmeviga(Difficulty)", 444));
     }
 }
