@@ -38,8 +38,7 @@ public class Ingredient {
     private String description;
 
     @Size(max = 255)
-    @NotNull
-    @Column(name = "conversion", nullable = false)
+    @Column(name = "conversion")
     private String conversion;
 
     @NotNull
