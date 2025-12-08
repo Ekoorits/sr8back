@@ -22,7 +22,7 @@ public class RecipeController {
         recipeService.addNewRecipeDetails(newRecipeDetails);
     }
 
-    @PostMapping("/recipe")
+    @PostMapping("/recipe/ingredient/add")
     @Operation(summary = "Uue retsepti tegemisel, lisab valitud koostisosa uue retsepti külge ja salvestab andmebaasi")
     public void addNewRecipeIngredient(@RequestParam Integer recipeId, @RequestBody NewRecipeIngredientsRequest newRecipeIngredientsRequest) {
         recipeService.addNewRecipeIngredients(newRecipeIngredientsRequest, recipeId);
