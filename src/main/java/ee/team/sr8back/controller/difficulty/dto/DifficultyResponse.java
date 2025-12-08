@@ -8,6 +8,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class DifficultyResponse {
-    private Integer difficultyId;
     private String difficultyLevelName;
+    private Integer difficultyLevelNumber;
 }

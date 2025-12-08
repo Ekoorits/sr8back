@@ -1,6 +1,7 @@
 package ee.team.sr8back.service;
 
 import ee.team.sr8back.controller.mealtype.dto.MealTypeResponse;
+import ee.team.sr8back.infrastructure.exception.DataNotFoundException;
 import ee.team.sr8back.persistence.mealtype.MealType;
 import ee.team.sr8back.persistence.mealtype.MealTypeMapper;
 import ee.team.sr8back.persistence.mealtype.MealTypeRepository;
@@ -20,5 +21,10 @@ public class MealTypeService {
     public List<MealTypeResponse> findAllMealTypes() {
         List<MealType> mealTypes = mealTypeRepository.findAll();
         return mealTypeMapper.toMealTypeResponses(mealTypes);
+    }
+
+    public MealType getMealType(String mealType) {
+        return mealTypeRepository.getMealTypeBy(mealType)
+                .orElseThrow(() -> new DataNotFoundException("Andmeviga(MealType)", 444));
     }
 }
