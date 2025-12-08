@@ -43,6 +43,6 @@ public class Ingredient {
 
     @NotNull
     @Column(name = "status", nullable = false)
-    private Integer status;
+    private String status;
 
 }

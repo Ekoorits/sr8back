@@ -90,6 +90,7 @@ CREATE TABLE recipe_ingredient (
                                    recipe_id int  NOT NULL,
                                    ingredient_id int  NOT NULL,
                                    amount decimal(8,3)  NOT NULL,
+                                   description varchar(255) NULL,
                                    CONSTRAINT recipe_ingredient_pk PRIMARY KEY (id)
 );
 
