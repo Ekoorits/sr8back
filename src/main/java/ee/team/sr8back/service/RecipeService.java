@@ -1,17 +1,22 @@
 package ee.team.sr8back.service;
 
 import ee.team.sr8back.controller.recipe.dto.NewRecipeDetailsRequest;
+import ee.team.sr8back.controller.recipe.dto.NewRecipeIngredientsRequest;
 import ee.team.sr8back.controller.recipe.dto.RecipeResponse;
 import ee.team.sr8back.infrastructure.exception.PrimaryKeyNotFoundException;
 import ee.team.sr8back.infrastructure.util.BytesConverter;
 import ee.team.sr8back.persistence.cookingtime.CookingTime;
 import ee.team.sr8back.persistence.difficulty.Difficulty;
+import ee.team.sr8back.persistence.ingredient.Ingredient;
 import ee.team.sr8back.persistence.mealtype.MealType;
 import ee.team.sr8back.persistence.recipe.Recipe;
 import ee.team.sr8back.persistence.recipe.RecipeMapper;
 import ee.team.sr8back.persistence.recipe.RecipeRepository;
 import ee.team.sr8back.persistence.recipeimage.RecipeImage;
 import ee.team.sr8back.persistence.recipeimage.RecipeImageRepository;
+import ee.team.sr8back.persistence.recipeingredient.RecipeIngredient;
+import ee.team.sr8back.persistence.recipeingredient.RecipeIngredientMapper;
+import ee.team.sr8back.persistence.recipeingredient.RecipeIngredientRepository;
 import ee.team.sr8back.persistence.user.User;
 import ee.team.sr8back.persistence.user.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -31,11 +36,19 @@ public class RecipeService {
     private final RecipeImageRepository recipeImageRepository;
     private final MealTypeService mealTypeService;
     private final UserRepository userRepository;
+    private final RecipeIngredientRepository recipeIngredientRepository;
+    private final RecipeIngredientMapper recipeIngredientMapper;
+    private final IngredientService ingredientService;
 
     @Transactional
     public void addNewRecipeDetails(NewRecipeDetailsRequest newRecipeDetailsRequest) {
         Recipe recipe = createAndSaveRecipe(newRecipeDetailsRequest);
         handleAddRecipeImage(newRecipeDetailsRequest.getImageData(), recipe);
+    }
+
+    @Transactional
+    public void addNewRecipeIngredients(NewRecipeIngredientsRequest newRecipeIngredientsRequest, Integer recipeId) {
+        creatAndSaveRecipeIngredient(newRecipeIngredientsRequest, recipeId);
     }
 
     public List<RecipeResponse> findRecipesBy(String searchParam) {
@@ -58,12 +71,27 @@ public class RecipeService {
     }
 
     private Recipe createNewRecipe(NewRecipeDetailsRequest newRecipeRequest) {
+
         Recipe recipe = recipeMapper.toRecipe(newRecipeRequest);
         getCookingTimeMinutesAndSetToRecipe(newRecipeRequest, recipe);
         getMealTypeAndSetToRecipe(newRecipeRequest, recipe);
         getDifficultyLevelAndSetToRecipe(newRecipeRequest, recipe);
         getCurrentUserAndSetAsAddingUser(recipe);
         return recipe;
+    }
+
+    private void creatAndSaveRecipeIngredient(NewRecipeIngredientsRequest newRecipeIngredientsRequest, Integer recipeId) {
+        RecipeIngredient recipeIngredient = createNewRecipeIngredient(newRecipeIngredientsRequest);
+        Recipe recipe = getCurrentRecipe(recipeId);
+        recipeIngredient.setRecipe(recipe);
+        recipeIngredientRepository.save(recipeIngredient);
+    }
+
+    private RecipeIngredient createNewRecipeIngredient(NewRecipeIngredientsRequest newRecipeIngredientsRequest) {
+        RecipeIngredient recipeIngredient = recipeIngredientMapper.toRecipeIngredient(newRecipeIngredientsRequest);
+        Ingredient ingredient = ingredientService.findIngredientBy(newRecipeIngredientsRequest.getIngredientName());
+        recipeIngredient.setIngredient(ingredient);
+        return recipeIngredient;
     }
 
     private void getCookingTimeMinutesAndSetToRecipe(NewRecipeDetailsRequest newRecipeRequest, Recipe recipe) {
@@ -90,6 +118,11 @@ public class RecipeService {
         // TODO: Find active user from FE session storage
         return userRepository.findById(1)
                 .orElseThrow(() -> new PrimaryKeyNotFoundException("id", 1));
+    }
+
+    private Recipe getCurrentRecipe(Integer recipeId) {
+        return recipeRepository.findById(recipeId)
+                .orElseThrow(() -> new PrimaryKeyNotFoundException("recipeId", recipeId));
     }
 
     private void handleAddRecipeImage(String imageData, Recipe recipe){

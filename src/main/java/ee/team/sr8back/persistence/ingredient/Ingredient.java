@@ -38,12 +38,11 @@ public class Ingredient {
     private String description;
 
     @Size(max = 255)
-    @NotNull
-    @Column(name = "conversion", nullable = false)
+    @Column(name = "conversion")
     private String conversion;
 
     @NotNull
     @Column(name = "status", nullable = false)
-    private Integer status;
+    private String status;
 
 }

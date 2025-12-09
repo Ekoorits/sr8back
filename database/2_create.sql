@@ -42,8 +42,8 @@ CREATE TABLE ingredient (
                             name varchar(255)  NOT NULL,
                             measure_unit_id int  NOT NULL,
                             description varchar(255)  NULL,
-                            conversion varchar(255)  NOT NULL,
-                            status int  NOT NULL,
+                            conversion varchar(255)  NULL,
+                            status varchar(5)  NOT NULL,
                             CONSTRAINT ingredient_pk PRIMARY KEY (id)
 );
 
@@ -90,6 +90,7 @@ CREATE TABLE recipe_ingredient (
                                    recipe_id int  NOT NULL,
                                    ingredient_id int  NOT NULL,
                                    amount decimal(8,3)  NOT NULL,
+                                   description varchar(255) NULL,
                                    CONSTRAINT recipe_ingredient_pk PRIMARY KEY (id)
 );
 
