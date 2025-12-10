@@ -88,14 +88,6 @@ public class RecipeService {
         return userRecipeResponses;
     }
 
-    private static void addImageDataToUserRecipeResponse(RecipeImage recipeImage, UserRecipeResponse userRecipeResponse) {
-        String imageDataString = BytesConverter.bytesToString(recipeImage.getImageData());
-        userRecipeResponse.setRecipeImage(imageDataString);
-    }
-
-    // TODO: RAIN VAATA SIIA
-
-
     private Recipe createAndSaveRecipe(NewRecipeDetailsRequest newRecipeRequest) {
         Recipe recipe = createNewRecipe(newRecipeRequest);
         recipeRepository.save(recipe);
@@ -111,7 +103,6 @@ public class RecipeService {
         getCurrentUserAndSetAsAddingUser(recipe);
         return recipe;
     }
-
 
     private void getCookingTimeMinutesAndSetToRecipe(NewRecipeDetailsRequest newRecipeRequest, Recipe recipe) {
         CookingTime cookingTime = cookingTimeService.getCookingTime(newRecipeRequest.getCookingTimeMinutesMax());
@@ -162,5 +153,11 @@ public class RecipeService {
         return recipeImage;
     }
 
-
+    public RecipeResponse findRecipe(Integer recipeId) {
+        Recipe recipe = getValidRecipe(recipeId);
+        RecipeResponse recipeResponse = recipeMapper.toRecipeResponse(recipe);
+        String recipeImageDataAsString = recipeImageService.getRecipeImage(recipeId);
+        recipeResponse.setImageData(recipeImageDataAsString);
+        return recipeResponse;
+    }
 }
