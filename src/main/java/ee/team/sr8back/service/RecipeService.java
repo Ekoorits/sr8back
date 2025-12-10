@@ -61,8 +61,6 @@ public class RecipeService {
         return recipeMapper.toRecipeResponses(recipes);
     }
 
-    // TODO: RAIN VAATA SIIA
-
     public List<UserRecipeResponse> findRecipesBy(Integer userId) {
         List<Recipe> recipes = recipeRepository.findRecipesBy(userId);
         List<UserRecipeResponse> userRecipeResponses = recipeMapper.toUserRecipeResponses(recipes);
