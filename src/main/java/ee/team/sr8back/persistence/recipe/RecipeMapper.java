@@ -28,4 +28,6 @@ public interface RecipeMapper {
     @Mapping(source = "difficultyLevelNumber", target = "difficulty.levelNumber")
     @Mapping(source = "mealType", target = "mealType.name")
     Recipe toRecipe(NewRecipeDetailsRequest newRecipeDetailsRequest);
+
+
 }
