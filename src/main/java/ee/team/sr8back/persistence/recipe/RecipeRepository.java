@@ -2,6 +2,7 @@ package ee.team.sr8back.persistence.recipe;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
@@ -14,5 +15,9 @@ public interface RecipeRepository extends JpaRepository<Recipe, Integer> {
             where (r.mealType.id = :mealTypeId or :mealTypeId = 0) and r.difficulty.levelNumber <= :difficultyLevelNumber and r.cookingTime.minutesMax <= :cookingTimeMinutesMax
             order by r.name""")
     List<Recipe> findRecipesBy(Integer mealTypeId, Integer difficultyLevelNumber, Integer cookingTimeMinutesMax);
+
+    @Query("select r from Recipe r where r.user.id = :userId")
+    List<Recipe> findRecipesBy(Integer userId);
+
 
 }

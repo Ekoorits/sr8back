@@ -1,22 +1,18 @@
 package ee.team.sr8back.service;
 
 import ee.team.sr8back.controller.recipe.dto.NewRecipeDetailsRequest;
-import ee.team.sr8back.controller.recipe.dto.NewRecipeIngredientsRequest;
 import ee.team.sr8back.controller.recipe.dto.RecipeResponse;
+import ee.team.sr8back.controller.recipe.dto.UserRecipeResponse;
 import ee.team.sr8back.infrastructure.exception.PrimaryKeyNotFoundException;
 import ee.team.sr8back.infrastructure.util.BytesConverter;
 import ee.team.sr8back.persistence.cookingtime.CookingTime;
 import ee.team.sr8back.persistence.difficulty.Difficulty;
-import ee.team.sr8back.persistence.ingredient.Ingredient;
 import ee.team.sr8back.persistence.mealtype.MealType;
 import ee.team.sr8back.persistence.recipe.Recipe;
 import ee.team.sr8back.persistence.recipe.RecipeMapper;
 import ee.team.sr8back.persistence.recipe.RecipeRepository;
 import ee.team.sr8back.persistence.recipeimage.RecipeImage;
 import ee.team.sr8back.persistence.recipeimage.RecipeImageRepository;
-import ee.team.sr8back.persistence.recipeingredient.RecipeIngredient;
-import ee.team.sr8back.persistence.recipeingredient.RecipeIngredientMapper;
-import ee.team.sr8back.persistence.recipeingredient.RecipeIngredientRepository;
 import ee.team.sr8back.persistence.user.User;
 import ee.team.sr8back.persistence.user.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -24,6 +20,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -36,20 +33,20 @@ public class RecipeService {
     private final RecipeImageRepository recipeImageRepository;
     private final MealTypeService mealTypeService;
     private final UserRepository userRepository;
-    private final RecipeIngredientRepository recipeIngredientRepository;
-    private final RecipeIngredientMapper recipeIngredientMapper;
-    private final IngredientService ingredientService;
+
+
+    public Recipe getValidRecipe(Integer recipeId) {
+        return recipeRepository.findById(recipeId)
+                .orElseThrow(() -> new PrimaryKeyNotFoundException("recipeId", recipeId));
+    }
 
     @Transactional
-    public void addNewRecipeDetails(NewRecipeDetailsRequest newRecipeDetailsRequest) {
+    public Integer addNewRecipeDetails(NewRecipeDetailsRequest newRecipeDetailsRequest) {
         Recipe recipe = createAndSaveRecipe(newRecipeDetailsRequest);
         handleAddRecipeImage(newRecipeDetailsRequest.getImageData(), recipe);
+        return recipe.getId();
     }
 
-    @Transactional
-    public void addNewRecipeIngredients(NewRecipeIngredientsRequest newRecipeIngredientsRequest, Integer recipeId) {
-        creatAndSaveRecipeIngredient(newRecipeIngredientsRequest, recipeId);
-    }
 
     public List<RecipeResponse> findRecipesBy(String searchParam) {
         List<Recipe> recipes = recipeRepository.findRecipesBy(searchParam);
@@ -63,6 +60,31 @@ public class RecipeService {
         List<Recipe> recipes = recipeRepository.findRecipesBy(mealTypeId, difficultyLevelNumber, cookingTimeMinutesMax);
         return recipeMapper.toRecipeResponses(recipes);
     }
+
+    public List<UserRecipeResponse> findRecipesBy(Integer userId) {
+        List<Recipe> recipes = recipeRepository.findRecipesBy(userId);
+        List<UserRecipeResponse> userRecipeResponses = recipeMapper.toUserRecipeResponses(recipes);
+
+        for (UserRecipeResponse recipeResponse : userRecipeResponses) {
+            Integer recipeId = recipeResponse.getRecipeId();
+            Optional<RecipeImage> optionalRecipeImage = recipeImageRepository.findByRecipe(recipeId);
+            if (optionalRecipeImage.isPresent()) {
+                byte[] imageDataAsBytes = optionalRecipeImage.get().getImageData();
+                String imageDataAsString = BytesConverter.bytesToString(imageDataAsBytes);
+                recipeResponse.setRecipeImage(imageDataAsString);
+            }
+        }
+
+        return userRecipeResponses;
+    }
+
+    private static void addImageDataToUserRecipeResponse(RecipeImage recipeImage, UserRecipeResponse userRecipeResponse) {
+        String imageDataString = BytesConverter.bytesToString(recipeImage.getImageData());
+        userRecipeResponse.setRecipeImage(imageDataString);
+    }
+
+    // TODO: RAIN VAATA SIIA
+
 
     private Recipe createAndSaveRecipe(NewRecipeDetailsRequest newRecipeRequest) {
         Recipe recipe = createNewRecipe(newRecipeRequest);
@@ -80,19 +102,6 @@ public class RecipeService {
         return recipe;
     }
 
-    private void creatAndSaveRecipeIngredient(NewRecipeIngredientsRequest newRecipeIngredientsRequest, Integer recipeId) {
-        RecipeIngredient recipeIngredient = createNewRecipeIngredient(newRecipeIngredientsRequest);
-        Recipe recipe = getCurrentRecipe(recipeId);
-        recipeIngredient.setRecipe(recipe);
-        recipeIngredientRepository.save(recipeIngredient);
-    }
-
-    private RecipeIngredient createNewRecipeIngredient(NewRecipeIngredientsRequest newRecipeIngredientsRequest) {
-        RecipeIngredient recipeIngredient = recipeIngredientMapper.toRecipeIngredient(newRecipeIngredientsRequest);
-        Ingredient ingredient = ingredientService.findIngredientBy(newRecipeIngredientsRequest.getIngredientName());
-        recipeIngredient.setIngredient(ingredient);
-        return recipeIngredient;
-    }
 
     private void getCookingTimeMinutesAndSetToRecipe(NewRecipeDetailsRequest newRecipeRequest, Recipe recipe) {
         CookingTime cookingTime = cookingTimeService.getCookingTime(newRecipeRequest.getCookingTimeMinutesMax());
@@ -114,19 +123,15 @@ public class RecipeService {
         recipe.setUser(user);
     }
 
-    private User getCurrentUser(){
+    private User getCurrentUser() {
         // TODO: Find active user from FE session storage
         return userRepository.findById(1)
                 .orElseThrow(() -> new PrimaryKeyNotFoundException("id", 1));
     }
 
-    private Recipe getCurrentRecipe(Integer recipeId) {
-        return recipeRepository.findById(recipeId)
-                .orElseThrow(() -> new PrimaryKeyNotFoundException("recipeId", recipeId));
-    }
 
-    private void handleAddRecipeImage(String imageData, Recipe recipe){
-        if(hasImage(imageData)) {
+    private void handleAddRecipeImage(String imageData, Recipe recipe) {
+        if (hasImage(imageData)) {
             createAndSaveRecipeImage(imageData, recipe);
         }
     }
@@ -146,4 +151,6 @@ public class RecipeService {
         recipeImage.setRecipe(recipe);
         return recipeImage;
     }
+
+
 }
