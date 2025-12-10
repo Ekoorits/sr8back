@@ -1,8 +1,8 @@
 package ee.team.sr8back.controller.recipe;
 
 import ee.team.sr8back.controller.recipe.dto.NewRecipeDetailsRequest;
-import ee.team.sr8back.controller.recipe.dto.NewRecipeIngredientsRequest;
 import ee.team.sr8back.controller.recipe.dto.RecipeResponse;
+import ee.team.sr8back.controller.recipe.dto.UserRecipeResponse;
 import ee.team.sr8back.service.RecipeService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
@@ -16,16 +16,10 @@ public class RecipeController {
 
     private final RecipeService recipeService;
 
-    @PostMapping("/recipe/detail/add")
-    @Operation(summary = "Salvestab uue retsepti detailid andmebaasi")
-    public void addNewRecipeDetails(@RequestBody NewRecipeDetailsRequest newRecipeDetails) {
-        recipeService.addNewRecipeDetails(newRecipeDetails);
-    }
-
-    @PostMapping("/recipe/ingredient/add")
-    @Operation(summary = "Uue retsepti tegemisel, lisab valitud koostisosa uue retsepti külge ja salvestab andmebaasi")
-    public void addNewRecipeIngredient(@RequestParam Integer recipeId, @RequestBody NewRecipeIngredientsRequest newRecipeIngredientsRequest) {
-        recipeService.addNewRecipeIngredients(newRecipeIngredientsRequest, recipeId);
+    @PostMapping("/recipe/detail")
+    @Operation(summary = "Salvestab uue retsepti detailid andmebaasi ja tagastab recipeId")
+    public Integer addNewRecipeDetails(@RequestBody NewRecipeDetailsRequest newRecipeDetails) {
+        return recipeService.addNewRecipeDetails(newRecipeDetails);
     }
 
     @GetMapping("/recipes")
@@ -38,5 +32,12 @@ public class RecipeController {
     @Operation(summary = "Tagastab filtreeritud retseptid vastavalt kasutaja sisestatud filtritele")
     public List<RecipeResponse> findRecipesBy(@RequestParam Integer mealTypeId, @RequestParam Integer difficultyId, @RequestParam Integer cookingTimeId) {
         return recipeService.findRecipesBy(mealTypeId, difficultyId, cookingTimeId);
+    }
+
+    @GetMapping("/my-recipes")
+    @Operation(summary = "Tagastab kõik kasutaja lisatud retseptid myRecipes vaatel vastavalt userId-le")
+    public List<UserRecipeResponse> findRecipesBy(@RequestParam Integer userId) {
+        return recipeService.findRecipesBy(userId);
+
     }
 }

@@ -2,6 +2,7 @@ package ee.team.sr8back.persistence.recipe;
 
 import ee.team.sr8back.controller.recipe.dto.NewRecipeDetailsRequest;
 import ee.team.sr8back.controller.recipe.dto.RecipeResponse;
+import ee.team.sr8back.controller.recipe.dto.UserRecipeResponse;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
@@ -28,4 +29,12 @@ public interface RecipeMapper {
     @Mapping(source = "difficultyLevelNumber", target = "difficulty.levelNumber")
     @Mapping(source = "mealType", target = "mealType.name")
     Recipe toRecipe(NewRecipeDetailsRequest newRecipeDetailsRequest);
+
+    @Mapping(source = "id", target = "recipeId")
+    @Mapping(source = "name", target = "recipeName")
+    @Mapping(constant = "", target = "recipeImage")
+    UserRecipeResponse toUserRecipeResponse(Recipe recipe);
+
+    List<UserRecipeResponse> toUserRecipeResponses(List<Recipe> recipes);
+
 }

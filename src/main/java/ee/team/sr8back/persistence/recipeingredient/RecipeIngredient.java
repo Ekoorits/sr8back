@@ -4,7 +4,6 @@ import ee.team.sr8back.persistence.ingredient.Ingredient;
 import ee.team.sr8back.persistence.recipe.Recipe;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -33,9 +32,5 @@ public class RecipeIngredient {
     @NotNull
     @Column(name = "amount", nullable = false, precision = 8, scale = 3)
     private BigDecimal amount;
-
-    @Size(max = 255)
-    @Column(name = "description")
-    private String description;
 
 }

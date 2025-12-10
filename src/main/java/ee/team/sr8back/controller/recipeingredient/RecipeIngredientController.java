@@ -2,12 +2,11 @@ package ee.team.sr8back.controller.recipeingredient;
 
 import ee.team.sr8back.controller.recipeingredient.dto.RecipeIngredientResponse;
 import ee.team.sr8back.service.RecipeIngredientService;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @RestController
@@ -22,7 +21,13 @@ public class RecipeIngredientController {
     }
 
     @DeleteMapping("/recipe/ingredient")
-    public void deleteRecipeIngredient(@RequestParam Integer recipeId, @RequestParam Integer recipeIngredientId) {
+    public void deleteRecipeIngredient(@RequestParam Integer recipeIngredientId) {
         recipeIngredientService.deleteRecipeIngredient(recipeIngredientId);
+    }
+
+    @PostMapping("/recipe/ingredient")
+    @Operation(summary = "Uue retsepti tegemisel, lisab valitud koostisosa uue retsepti külge ja salvestab andmebaasi")
+    public void addRecipeIngredient(@RequestParam Integer recipeId,@RequestParam Integer ingredientId, @RequestParam BigDecimal ingredientAmount ) {
+        recipeIngredientService.addRecipeIngredient(recipeId, ingredientId, ingredientAmount);
     }
 }
