@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class NewRecipeIngredientsRequest {
+    private Integer ingredientId;
     private String ingredientName;
     private Integer ingredientAmount;
     private String ingredientDescription;

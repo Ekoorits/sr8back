@@ -19,4 +19,8 @@ public class IngredientController {
     public List<IngredientResponse> findIngredientsBy(@RequestParam String searchParam) {
         return ingredientService.findIngredientsBy(searchParam);
     }
+    @GetMapping("/ingredients/all")
+    public List<IngredientResponse> findAllIngredients() {
+        return ingredientService.findAllIngredients();
+    }
 }
