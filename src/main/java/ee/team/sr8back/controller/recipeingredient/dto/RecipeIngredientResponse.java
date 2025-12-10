@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class RecipeIngredientResponse {
 
+    private Integer recipeIngredientId;
     private String recipeIngredientName;
     private Integer recipeIngredientAmount;
     private String recipeIngredientMeasureUnit;
