@@ -5,6 +5,6 @@ import lombok.Data;
 @Data
 public class RecipeImageResponse {
     private Integer recipeId;
-    private byte imageData;;
+    private String  imageData;;
 
 }
