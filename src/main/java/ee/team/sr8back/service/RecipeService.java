@@ -67,7 +67,7 @@ public class RecipeService {
 
         for (UserRecipeResponse recipeResponse : userRecipeResponses) {
             Integer recipeId = recipeResponse.getRecipeId();
-            Optional<RecipeImage> optionalRecipeImage = recipeImageRepository.findByRecipe(recipeId);
+            Optional<RecipeImage> optionalRecipeImage = recipeImageRepository.findRecipeImageBy(recipeId);
             if (optionalRecipeImage.isPresent()) {
                 byte[] imageDataAsBytes = optionalRecipeImage.get().getImageData();
                 String imageDataAsString = BytesConverter.bytesToString(imageDataAsBytes);

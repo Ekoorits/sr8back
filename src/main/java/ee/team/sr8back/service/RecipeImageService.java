@@ -16,7 +16,7 @@ public class RecipeImageService {
     private final RecipeImageMapper recipeImageMapper;
 
     public RecipeImageResponse getRecipeImage(Integer recipeId) {
-        RecipeImage recipeImage = recipeImageRepository.findByRecipeId(recipeId)
+        RecipeImage recipeImage = recipeImageRepository.findRecipeImageBy(recipeId)
                 .orElseThrow(()-> new PrimaryKeyNotFoundException("recipeId", recipeId));
         return recipeImageMapper.toRecipeImageResponse(recipeImage);
     }
