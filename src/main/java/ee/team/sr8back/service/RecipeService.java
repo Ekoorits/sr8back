@@ -33,6 +33,7 @@ public class RecipeService {
     private final RecipeImageRepository recipeImageRepository;
     private final MealTypeService mealTypeService;
     private final UserRepository userRepository;
+    private final RecipeImageService recipeImageService;
 
 
     public Recipe getValidRecipe(Integer recipeId) {
@@ -50,7 +51,16 @@ public class RecipeService {
 
     public List<RecipeResponse> findRecipesBy(String searchParam) {
         List<Recipe> recipes = recipeRepository.findRecipesBy(searchParam);
-        return recipeMapper.toRecipeResponses(recipes);
+        List<RecipeResponse> recipeResponses = recipeMapper.toRecipeResponses(recipes);
+        handleAddImageData(recipeResponses);
+        return recipeResponses;
+    }
+
+    private void handleAddImageData(List<RecipeResponse> recipeResponses) {
+        for (RecipeResponse recipeResponse : recipeResponses) {
+            String recipeImageData = recipeImageService.getRecipeImage(recipeResponse.getRecipeId());
+            recipeResponse.setImageData(recipeImageData);
+        }
     }
 
     public List<RecipeResponse> findRecipesBy(Integer mealTypeId, Integer difficultyId, Integer cookingTimeId) {

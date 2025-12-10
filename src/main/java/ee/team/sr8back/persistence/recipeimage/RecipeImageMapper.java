@@ -8,7 +8,6 @@ import org.mapstruct.*;
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = MappingConstants.ComponentModel.SPRING, uses = {RecipeMapper.class})
 public interface RecipeImageMapper {
 
-    @Mapping(source = "recipe.id", target = "recipeId")
     @Mapping(source = "imageData", target = "imageData", qualifiedByName = "bytesToString")
     RecipeImageResponse toRecipeImageResponse(RecipeImage recipeImage);
 

@@ -14,11 +14,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class RecipeImageController {
     private final RecipeImageService recipeImageService;
 
-    @GetMapping("/recipes/image")
+    @GetMapping("/recipe/image")
     @Operation(summary = "Tagastab retsepti pildi")
-
-    public RecipeImageResponse getRecipeImageBy(@RequestParam Integer recipeId) {
+    public String getRecipeImage(@RequestParam Integer recipeId) {
         return recipeImageService.getRecipeImage(recipeId);
-
     }
+
 }

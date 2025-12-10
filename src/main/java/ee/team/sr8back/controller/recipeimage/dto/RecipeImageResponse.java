@@ -4,7 +4,5 @@ import lombok.Data;
 
 @Data
 public class RecipeImageResponse {
-    private Integer recipeId;
     private String  imageData;;
-
 }
