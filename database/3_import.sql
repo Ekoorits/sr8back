@@ -31,7 +31,20 @@ INSERT INTO smartrecipebook.category (id, name, description) VALUES (default, 'M
 INSERT INTO smartrecipebook.category (id, name) VALUES (default, 'Alkohol');
 INSERT INTO smartrecipebook.category (id, name) VALUES (default, 'Muu');
 
-INSERT INTO smartrecipebook.user (id, role_id, username, password, status) VALUES (default, 1, 'Peeter', '1234', 'A');
+INSERT INTO smartrecipebook.user (id, role_id, username, password, status) VALUES (DEFAULT, 1, 'Peeter', '1234', 'A');
+INSERT INTO smartrecipebook.user (id, role_id, username, password, status) VALUES (DEFAULT, 3, 'MariTamm', '1234', 'A');
+INSERT INTO smartrecipebook.user (id, role_id, username, password, status) VALUES (DEFAULT, 3, 'KarlMaasik1', '1234', 'A');
+INSERT INTO smartrecipebook.user (id, role_id, username, password, status) VALUES (DEFAULT, 3, 'AnnikaKask33', '1234', 'A');
+INSERT INTO smartrecipebook.user (id, role_id, username, password, status) VALUES (DEFAULT, 3, 'JaanR', '1234', 'A');
+INSERT INTO smartrecipebook.user (id, role_id, username, password, status) VALUES (DEFAULT, 3, 'HRand', '1234', 'A');
+
+INSERT INTO smartrecipebook.contact (id, user_id, first_name, last_name, email) VALUES (DEFAULT, 1, 'Peeter', 'Tamm', 'ptamm@mail.com');
+INSERT INTO smartrecipebook.contact (id, user_id, first_name, last_name, email) VALUES (DEFAULT, 2, 'Mari', 'Tamm', 'mtamm@mail.com');
+INSERT INTO smartrecipebook.contact (id, user_id, first_name, last_name, email) VALUES (DEFAULT, 3, 'Karl', 'Maasik', 'karlmaasik@mail.com');
+INSERT INTO smartrecipebook.contact (id, user_id, first_name, last_name, email) VALUES (DEFAULT, 4, 'Annika', 'Kask', 'kaskannika@mail.ee');
+INSERT INTO smartrecipebook.contact (id, user_id, first_name, last_name, email) VALUES (DEFAULT, 5, 'Jaan', 'Reinsalu', 'reinsaluj@mail.com');
+INSERT INTO smartrecipebook.contact (id, user_id, first_name, last_name, email) VALUES (DEFAULT, 6, 'Heli', 'Rand', 'helirand@mail.com');
+
 
 INSERT INTO smartrecipebook.ingredient (id, name, category_id, measure_unit_id, description, conversion, status)
 VALUES (DEFAULT, 'Piim', 1, 1, 'Lehmapiim toiduvalmistamiseks', '100 ml = 103 g', 'ACT');
@@ -97,7 +110,7 @@ INSERT INTO smartrecipebook.ingredient (id, name, category_id, measure_unit_id, 
 VALUES (DEFAULT, 'Tomat', 2, 2, 'Värske tomat', '1 tk = 80 g', 'ACT');
 
 INSERT INTO smartrecipebook.ingredient (id, name, category_id, measure_unit_id, description, conversion, status)
-VALUES (DEFAULT, 'Kurkk', 2, 2, 'Värske kurk', '1 tk = 300 g', 'ACT');
+VALUES (DEFAULT, 'Kurk', 2, 2, 'Värske kurk', '1 tk = 300 g', 'ACT');
 
 INSERT INTO smartrecipebook.ingredient (id, name, category_id, measure_unit_id, description, conversion, status)
 VALUES (DEFAULT, 'Paprika', 2, 2, 'Värske paprika', '1 tk = 120 g', 'ACT');
@@ -122,6 +135,99 @@ VALUES (DEFAULT, 'Banaan', 2, 2, 'Kollane banaan', '1 tk = 120 g', 'ACT');
 
 INSERT INTO smartrecipebook.ingredient (id, name, category_id, measure_unit_id, description, conversion, status)
 VALUES (DEFAULT, 'Pähklid', 3, 2, 'Segapähklid', '1 dl = 60 g', 'ACT');
+
+INSERT INTO smartrecipebook.ingredient (id, name, category_id, measure_unit_id, description, status)
+VALUES (DEFAULT, 'Basiilik', 2, 2, 'Värske basiilik', 'ACT');
+
+INSERT INTO smartrecipebook.ingredient (id, name, category_id, measure_unit_id, description, status)
+VALUES (DEFAULT, 'Sai', 4, 2, 'Nisusai', 'ACT');
+
+INSERT INTO smartrecipebook.ingredient (id, name, category_id, measure_unit_id, description, status)
+VALUES (DEFAULT, 'Oliiviõli', 3, 1, 'Külmpressitud', 'ACT');
+
+INSERT INTO smartrecipebook.ingredient (id, name, category_id, measure_unit_id, description, status)
+VALUES (DEFAULT, 'Küüslaauk', 2, 2, 'Orgaaniline', 'ACT');
+
+INSERT INTO smartrecipebook.ingredient (id, name, category_id, measure_unit_id, description, status)
+VALUES (DEFAULT, 'Vahukoor', 1, 1, 'Rasvane', 'ACT');
+
+INSERT INTO smartrecipebook.ingredient (id, name, category_id, measure_unit_id, description, status)
+VALUES (DEFAULT, 'Veiseliha', 2, 2, 'Filee', 'ACT');
+
+INSERT INTO smartrecipebook.ingredient (id, name, category_id, measure_unit_id, description, status)
+VALUES (DEFAULT, 'Avokaado', 2, 2, 'Söömisküps', 'ACT');
+
+INSERT INTO smartrecipebook.ingredient (id, name, category_id, measure_unit_id, description, status)
+VALUES (DEFAULT, 'Kõrvits', 2, 2, 'Kollane', 'ACT');
+
+INSERT INTO smartrecipebook.ingredient (id, name, category_id, measure_unit_id, description, status)
+VALUES (DEFAULT, 'Toidukoor', 1, 1, 'Rasvane', 'ACT');
+
+
+INSERT INTO smartrecipebook.recipe (id, user_id, meal_type_id, cooking_time_id, difficulty_id, name, author, pax, instructions)
+VALUES (DEFAULT, 1, 1, 1, 1, 'Klassikaline bruschetta', 'Peeter Tamm', 2, 'Viiluta sai, rösti ja kata tomati-basiiliku seguga.');
+
+INSERT INTO smartrecipebook.recipe (id, user_id, meal_type_id, cooking_time_id, difficulty_id, name, author, pax, instructions)
+VALUES (DEFAULT, 2, 2, 2, 2, 'Ahjus küpsetatud kanafilee', 'Mari Tamm', 4, 'Maitsesta kana ja küpseta 60 min 180 kraadil.');
+
+INSERT INTO smartrecipebook.recipe (id, user_id, meal_type_id, cooking_time_id, difficulty_id, name, author, pax, instructions)
+VALUES (DEFAULT, 3, 3, 1, 1, 'Juustu-küüslaugu suupisted', 'Karl Maasik', 6, 'Sega juust ja küüslauk, määri saiaviiludele ja küpseta lühidalt.');
+
+INSERT INTO smartrecipebook.recipe (id, user_id, meal_type_id, cooking_time_id, difficulty_id, name, author, pax, instructions)
+VALUES (DEFAULT, 4, 4, 3, 2, 'Šokolaadimousse', 'Annika Kask', 4, 'Sulata šokolaad ja sega vahustatud koorega, jahuta 2 tundi.');
+
+INSERT INTO smartrecipebook.recipe (id, user_id, meal_type_id, cooking_time_id, difficulty_id, name, author, pax, instructions)
+VALUES (DEFAULT, 6, 5, 1, 1, 'Värske marjasmuuti', 'Heli Rand', 2, 'Blendi marjad, piim ja banaan kuni ühtlaseks.');
+
+INSERT INTO smartrecipebook.recipe (id, user_id, meal_type_id, cooking_time_id, difficulty_id, name, author, pax, instructions)
+VALUES (DEFAULT, 2, 2, 4, 3, 'Veiseliha guljašš', 'Mari Tamm', 5, 'Pruunista liha, lisa maitseained ja hauta 120 min.');
+
+INSERT INTO smartrecipebook.recipe (id, user_id, meal_type_id, cooking_time_id, difficulty_id, name, author, pax, instructions)
+VALUES (DEFAULT, 1, 3, 1, 1, 'Kurk-avokaado rullid', 'Peeter Tamm', 3, 'Viiluta kurk, täida avokaadoga ja vormi rullid.');
+
+INSERT INTO smartrecipebook.recipe (id, user_id, meal_type_id, cooking_time_id, difficulty_id, name, author, pax, instructions)
+VALUES (DEFAULT, 3, 1, 2, 1, 'Kreemine kõrvitsapüreesupp', 'Karl Maasik', 4, 'Keeda kõrvits, püreesta ja maitsesta koore ning vürtsidega.');
+
+INSERT INTO smartrecipebook.recipe (id, user_id, meal_type_id, cooking_time_id, difficulty_id, name, author, pax, instructions)
+VALUES (DEFAULT, 4, 4, 2, 2, 'Kohupiimakreem marjadega', 'Annika Kask', 3, 'Sega kohupiim suhkruga ja serveeri värskete marjadega.');
+
+INSERT INTO smartrecipebook.recipe (id, user_id, meal_type_id, cooking_time_id, difficulty_id, name, author, pax, instructions)
+VALUES (DEFAULT, 5, 2, 6, 3, 'Aeglaselt küpsetatud seapraad', 'Jaan Reinsalu', 8, 'Hauta sealiha 180 min madalal kuumusel kuni pehme.');
+
+
+INSERT INTO smartrecipebook.recipe_ingredient(id, recipe_id, ingredient_id, amount, description) VALUES (DEFAULT, 3, 32, 500,'viilutatud sai');
+INSERT INTO smartrecipebook.recipe_ingredient(id, recipe_id, ingredient_id, amount) VALUES (DEFAULT, 3, 31, 50);
+INSERT INTO smartrecipebook.recipe_ingredient(id, recipe_id, ingredient_id, amount) VALUES (DEFAULT, 3, 21, 100);
+
+INSERT INTO smartrecipebook.recipe_ingredient(id, recipe_id, ingredient_id, amount, description) VALUES (DEFAULT, 4, 8, 1000, 'Maitsestatud filee');
+
+INSERT INTO smartrecipebook.recipe_ingredient(id, recipe_id, ingredient_id, amount) VALUES (DEFAULT, 5, 32, 750);
+INSERT INTO smartrecipebook.recipe_ingredient(id, recipe_id, ingredient_id, amount) VALUES (DEFAULT, 5, 3, 300);
+INSERT INTO smartrecipebook.recipe_ingredient(id, recipe_id, ingredient_id, amount) VALUES (DEFAULT, 5, 34, 100);
+
+INSERT INTO smartrecipebook.recipe_ingredient(id, recipe_id, ingredient_id, amount) VALUES (DEFAULT, 6, 17, 1500);
+INSERT INTO smartrecipebook.recipe_ingredient(id, recipe_id, ingredient_id, amount) VALUES (DEFAULT, 6, 35, 500);
+
+INSERT INTO smartrecipebook.recipe_ingredient(id, recipe_id, ingredient_id, amount) VALUES (DEFAULT, 7, 1, 500);
+INSERT INTO smartrecipebook.recipe_ingredient(id, recipe_id, ingredient_id, amount) VALUES (DEFAULT, 7, 16, 200);
+INSERT INTO smartrecipebook.recipe_ingredient(id, recipe_id, ingredient_id, amount) VALUES (DEFAULT, 7, 29, 200);
+
+INSERT INTO smartrecipebook.recipe_ingredient(id, recipe_id, ingredient_id, amount) VALUES (DEFAULT, 8, 36, 2000);
+INSERT INTO smartrecipebook.recipe_ingredient(id, recipe_id, ingredient_id, amount) VALUES (DEFAULT, 8, 9, 500);
+
+INSERT INTO smartrecipebook.recipe_ingredient(id, recipe_id, ingredient_id, amount) VALUES (DEFAULT, 9, 22, 800);
+INSERT INTO smartrecipebook.recipe_ingredient(id, recipe_id, ingredient_id, amount) VALUES (DEFAULT, 9, 37, 300);
+
+INSERT INTO smartrecipebook.recipe_ingredient(id, recipe_id, ingredient_id, amount) VALUES (DEFAULT, 10, 38, 5000);
+INSERT INTO smartrecipebook.recipe_ingredient(id, recipe_id, ingredient_id, amount) VALUES (DEFAULT, 10, 39, 1000);
+
+INSERT INTO smartrecipebook.recipe_ingredient(id, recipe_id, ingredient_id, amount) VALUES (DEFAULT, 11, 26, 750);
+INSERT INTO smartrecipebook.recipe_ingredient(id, recipe_id, ingredient_id, amount) VALUES (DEFAULT, 11, 5, 150);
+INSERT INTO smartrecipebook.recipe_ingredient(id, recipe_id, ingredient_id, amount) VALUES (DEFAULT, 11, 16, 250);
+
+INSERT INTO smartrecipebook.recipe_ingredient(id, recipe_id, ingredient_id, amount) VALUES (DEFAULT, 12, 7, 2500);
+INSERT INTO smartrecipebook.recipe_ingredient(id, recipe_id, ingredient_id, amount) VALUES (DEFAULT, 12, 33, 100);
+
 
 
 
