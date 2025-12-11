@@ -17,6 +17,8 @@ public interface RecipeMapper {
     @Mapping(source = "name", target = "name")
     @Mapping(source = "pax", target = "pax")
     @Mapping(source = "author", target = "author")
+    @Mapping(source = "instructions", target = "instructions")
+    @Mapping(constant = "", target = "imageData")
     RecipeResponse toRecipeResponse(Recipe recipe);
 
     List<RecipeResponse> toRecipeResponses(List<Recipe> recipes);
