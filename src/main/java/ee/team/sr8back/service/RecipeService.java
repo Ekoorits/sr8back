@@ -42,6 +42,15 @@ public class RecipeService {
     }
 
     @Transactional
+    public RecipeResponse findRecipe(Integer recipeId) {
+        Recipe recipe = getValidRecipe(recipeId);
+        RecipeResponse recipeResponse = recipeMapper.toRecipeResponse(recipe);
+        String recipeImageDataAsString = recipeImageService.getRecipeImage(recipeId);
+        recipeResponse.setImageData(recipeImageDataAsString);
+        return recipeResponse;
+    }
+
+    @Transactional
     public Integer addNewRecipeDetails(NewRecipeDetailsRequest newRecipeDetailsRequest) {
         Recipe recipe = createAndSaveRecipe(newRecipeDetailsRequest);
         handleAddRecipeImage(newRecipeDetailsRequest.getImageData(), recipe);
@@ -151,13 +160,5 @@ public class RecipeService {
         recipeImage.setImageData(BytesConverter.stringToBytes(imageData));
         recipeImage.setRecipe(recipe);
         return recipeImage;
-    }
-
-    public RecipeResponse findRecipe(Integer recipeId) {
-        Recipe recipe = getValidRecipe(recipeId);
-        RecipeResponse recipeResponse = recipeMapper.toRecipeResponse(recipe);
-        String recipeImageDataAsString = recipeImageService.getRecipeImage(recipeId);
-        recipeResponse.setImageData(recipeImageDataAsString);
-        return recipeResponse;
     }
 }
