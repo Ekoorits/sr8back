@@ -195,38 +195,38 @@ INSERT INTO smartrecipebook.recipe (id, user_id, meal_type_id, cooking_time_id, 
 VALUES (DEFAULT, 5, 2, 6, 3, 'Aeglaselt küpsetatud seapraad', 'Jaan Reinsalu', 8, 'Hauta sealiha 180 min madalal kuumusel kuni pehme.');
 
 
-INSERT INTO smartrecipebook.recipe_ingredient(id, recipe_id, ingredient_id, amount, description) VALUES (DEFAULT, 3, 32, 500,'viilutatud sai');
-INSERT INTO smartrecipebook.recipe_ingredient(id, recipe_id, ingredient_id, amount) VALUES (DEFAULT, 3, 31, 50);
-INSERT INTO smartrecipebook.recipe_ingredient(id, recipe_id, ingredient_id, amount) VALUES (DEFAULT, 3, 21, 100);
+INSERT INTO smartrecipebook.recipe_ingredient(id, recipe_id, ingredient_id, amount, description) VALUES (DEFAULT, 1, 32, 500,'viilutatud sai');
+INSERT INTO smartrecipebook.recipe_ingredient(id, recipe_id, ingredient_id, amount) VALUES (DEFAULT, 1, 31, 50);
+INSERT INTO smartrecipebook.recipe_ingredient(id, recipe_id, ingredient_id, amount) VALUES (DEFAULT, 1, 21, 100);
 
-INSERT INTO smartrecipebook.recipe_ingredient(id, recipe_id, ingredient_id, amount, description) VALUES (DEFAULT, 4, 8, 1000, 'Maitsestatud filee');
+INSERT INTO smartrecipebook.recipe_ingredient(id, recipe_id, ingredient_id, amount, description) VALUES (DEFAULT, 2, 8, 1000, 'Maitsestatud filee');
 
-INSERT INTO smartrecipebook.recipe_ingredient(id, recipe_id, ingredient_id, amount) VALUES (DEFAULT, 5, 32, 750);
-INSERT INTO smartrecipebook.recipe_ingredient(id, recipe_id, ingredient_id, amount) VALUES (DEFAULT, 5, 3, 300);
-INSERT INTO smartrecipebook.recipe_ingredient(id, recipe_id, ingredient_id, amount) VALUES (DEFAULT, 5, 34, 100);
+INSERT INTO smartrecipebook.recipe_ingredient(id, recipe_id, ingredient_id, amount) VALUES (DEFAULT, 3, 32, 750);
+INSERT INTO smartrecipebook.recipe_ingredient(id, recipe_id, ingredient_id, amount) VALUES (DEFAULT, 3, 3, 300);
+INSERT INTO smartrecipebook.recipe_ingredient(id, recipe_id, ingredient_id, amount) VALUES (DEFAULT, 3, 34, 100);
 
-INSERT INTO smartrecipebook.recipe_ingredient(id, recipe_id, ingredient_id, amount) VALUES (DEFAULT, 6, 17, 1500);
-INSERT INTO smartrecipebook.recipe_ingredient(id, recipe_id, ingredient_id, amount) VALUES (DEFAULT, 6, 35, 500);
+INSERT INTO smartrecipebook.recipe_ingredient(id, recipe_id, ingredient_id, amount) VALUES (DEFAULT, 4, 17, 1500);
+INSERT INTO smartrecipebook.recipe_ingredient(id, recipe_id, ingredient_id, amount) VALUES (DEFAULT, 4, 35, 500);
 
-INSERT INTO smartrecipebook.recipe_ingredient(id, recipe_id, ingredient_id, amount) VALUES (DEFAULT, 7, 1, 500);
-INSERT INTO smartrecipebook.recipe_ingredient(id, recipe_id, ingredient_id, amount) VALUES (DEFAULT, 7, 16, 200);
-INSERT INTO smartrecipebook.recipe_ingredient(id, recipe_id, ingredient_id, amount) VALUES (DEFAULT, 7, 29, 200);
+INSERT INTO smartrecipebook.recipe_ingredient(id, recipe_id, ingredient_id, amount) VALUES (DEFAULT, 5, 1, 500);
+INSERT INTO smartrecipebook.recipe_ingredient(id, recipe_id, ingredient_id, amount) VALUES (DEFAULT, 5, 16, 200);
+INSERT INTO smartrecipebook.recipe_ingredient(id, recipe_id, ingredient_id, amount) VALUES (DEFAULT, 5, 29, 200);
 
-INSERT INTO smartrecipebook.recipe_ingredient(id, recipe_id, ingredient_id, amount) VALUES (DEFAULT, 8, 36, 2000);
-INSERT INTO smartrecipebook.recipe_ingredient(id, recipe_id, ingredient_id, amount) VALUES (DEFAULT, 8, 9, 500);
+INSERT INTO smartrecipebook.recipe_ingredient(id, recipe_id, ingredient_id, amount) VALUES (DEFAULT, 6, 36, 2000);
+INSERT INTO smartrecipebook.recipe_ingredient(id, recipe_id, ingredient_id, amount) VALUES (DEFAULT, 6, 9, 500);
 
-INSERT INTO smartrecipebook.recipe_ingredient(id, recipe_id, ingredient_id, amount) VALUES (DEFAULT, 9, 22, 800);
-INSERT INTO smartrecipebook.recipe_ingredient(id, recipe_id, ingredient_id, amount) VALUES (DEFAULT, 9, 37, 300);
+INSERT INTO smartrecipebook.recipe_ingredient(id, recipe_id, ingredient_id, amount) VALUES (DEFAULT, 7, 22, 800);
+INSERT INTO smartrecipebook.recipe_ingredient(id, recipe_id, ingredient_id, amount) VALUES (DEFAULT, 7, 37, 300);
 
-INSERT INTO smartrecipebook.recipe_ingredient(id, recipe_id, ingredient_id, amount) VALUES (DEFAULT, 10, 38, 5000);
-INSERT INTO smartrecipebook.recipe_ingredient(id, recipe_id, ingredient_id, amount) VALUES (DEFAULT, 10, 39, 1000);
+INSERT INTO smartrecipebook.recipe_ingredient(id, recipe_id, ingredient_id, amount) VALUES (DEFAULT, 8, 38, 5000);
+INSERT INTO smartrecipebook.recipe_ingredient(id, recipe_id, ingredient_id, amount) VALUES (DEFAULT, 8, 39, 1000);
 
-INSERT INTO smartrecipebook.recipe_ingredient(id, recipe_id, ingredient_id, amount) VALUES (DEFAULT, 11, 26, 750);
-INSERT INTO smartrecipebook.recipe_ingredient(id, recipe_id, ingredient_id, amount) VALUES (DEFAULT, 11, 5, 150);
-INSERT INTO smartrecipebook.recipe_ingredient(id, recipe_id, ingredient_id, amount) VALUES (DEFAULT, 11, 16, 250);
+INSERT INTO smartrecipebook.recipe_ingredient(id, recipe_id, ingredient_id, amount) VALUES (DEFAULT, 9, 26, 750);
+INSERT INTO smartrecipebook.recipe_ingredient(id, recipe_id, ingredient_id, amount) VALUES (DEFAULT, 9, 5, 150);
+INSERT INTO smartrecipebook.recipe_ingredient(id, recipe_id, ingredient_id, amount) VALUES (DEFAULT, 9, 16, 250);
 
-INSERT INTO smartrecipebook.recipe_ingredient(id, recipe_id, ingredient_id, amount) VALUES (DEFAULT, 12, 7, 2500);
-INSERT INTO smartrecipebook.recipe_ingredient(id, recipe_id, ingredient_id, amount) VALUES (DEFAULT, 12, 33, 100);
+INSERT INTO smartrecipebook.recipe_ingredient(id, recipe_id, ingredient_id, amount) VALUES (DEFAULT, 10, 7, 2500);
+INSERT INTO smartrecipebook.recipe_ingredient(id, recipe_id, ingredient_id, amount) VALUES (DEFAULT, 10, 33, 100);
 
 
 
