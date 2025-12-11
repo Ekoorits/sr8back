@@ -12,5 +12,6 @@ public class RecipeResponse {
     private String name;
     private Integer pax;
     private String author;
+    private String instructions;
     private String imageData;
 }
