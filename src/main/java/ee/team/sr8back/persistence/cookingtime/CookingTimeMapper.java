@@ -8,6 +8,7 @@ import java.util.List;
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = MappingConstants.ComponentModel.SPRING)
 public interface CookingTimeMapper {
 
+    @Mapping(source = "id", target = "cookingTimeId")
     @Mapping(source = "minutesMax", target = "cookingTimeMinutesMax")
     CookingTimeResponse toCookingTimeResponse(CookingTime cookingTime);
 

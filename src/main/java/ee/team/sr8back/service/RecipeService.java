@@ -73,11 +73,32 @@ public class RecipeService {
     }
 
     public List<RecipeResponse> findRecipesBy(Integer mealTypeId, Integer difficultyId, Integer cookingTimeId) {
-        Integer difficultyLevelNumber = difficultyService.getDifficultyLevelNumber(difficultyId);
-        Integer cookingTimeMinutesMax = cookingTimeService.getCookingTimeMinutesMax(cookingTimeId);
+        Integer difficultyLevelNumber = getDifficultyLevelNumber(difficultyId);
+        Integer cookingTimeMinutesMax = getIntegerCookingTimeMinutesMax(cookingTimeId);
 
         List<Recipe> recipes = recipeRepository.findRecipesBy(mealTypeId, difficultyLevelNumber, cookingTimeMinutesMax);
         return recipeMapper.toRecipeResponses(recipes);
+    }
+
+    private Integer getIntegerCookingTimeMinutesMax(Integer cookingTimeId) {
+        Integer cookingTimeMinutesMax;
+        if (cookingTimeId.equals(0)) {
+            cookingTimeMinutesMax = 1000;
+        } else {
+            cookingTimeMinutesMax = cookingTimeService.getCookingTimeMinutesMax(cookingTimeId);
+
+        }
+        return cookingTimeMinutesMax;
+    }
+
+    private Integer getDifficultyLevelNumber(Integer difficultyId) {
+        Integer difficultyLevelNumber;
+        if (difficultyId.equals(0)) {
+            difficultyLevelNumber = 1;
+        } else {
+            difficultyLevelNumber = difficultyService.getDifficultyLevelNumber(difficultyId);
+        }
+        return difficultyLevelNumber;
     }
 
     public List<UserRecipeResponse> findRecipesBy(Integer userId) {
