@@ -27,7 +27,7 @@ public interface RecipeMapper {
     @Mapping(source = "authorName", target = "author")
     @Mapping(source = "pax", target = "pax")
     @Mapping(source = "instructions", target = "instructions")
-    @Mapping(source = "cookingTimeMinutesMax", target = "cookingTime.minutesMax")
+    @Mapping(source = "cookingTimeId", target = "cookingTime.id")
     @Mapping(source = "difficultyLevelNumber", target = "difficulty.levelNumber")
     @Mapping(source = "mealType", target = "mealType.name")
     Recipe toRecipe(NewRecipeDetailsRequest newRecipeDetailsRequest);

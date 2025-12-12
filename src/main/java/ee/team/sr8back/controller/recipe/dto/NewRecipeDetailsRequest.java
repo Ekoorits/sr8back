@@ -13,7 +13,7 @@ public class NewRecipeDetailsRequest {
     private String authorName;
     private String mealType;
     private Integer difficultyLevelNumber;
-    private Integer cookingTimeMinutesMax;
+    private Integer cookingTimeId;
     private Integer pax;
     private String instructions;
     private String imageData;

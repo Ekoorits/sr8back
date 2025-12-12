@@ -135,7 +135,7 @@ public class RecipeService {
     }
 
     private void getCookingTimeMinutesAndSetToRecipe(NewRecipeDetailsRequest newRecipeRequest, Recipe recipe) {
-        CookingTime cookingTime = cookingTimeService.getCookingTime(newRecipeRequest.getCookingTimeMinutesMax());
+        CookingTime cookingTime = cookingTimeService.getValidCookingTimeBy(newRecipeRequest.getCookingTimeId());
         recipe.setCookingTime(cookingTime);
     }
 
